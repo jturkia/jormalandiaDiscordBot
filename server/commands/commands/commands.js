@@ -1,11 +1,11 @@
 const fs = require("fs");
 
 const usage = () => {
-  return "!invalid";
+  return "!commands";
 }
 
 const execute = (msgObject, params, cb) => {
-  let txt = "Invalid command " + params[0] + "! Available commands: \n";
+  let txt = "Available commands: \n";
 
   let list = fs.readdirSync(__dirname + "/");
   for(let i = 0; i < list.length ; i++){

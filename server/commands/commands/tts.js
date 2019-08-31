@@ -3,11 +3,9 @@ const usage = () => {
 }
 
 const execute = (msgObject, params, cb) => {
-  let result = {
-    responseText: params.join(" "),
-    tts: true
-  };
-  cb(result);
+  let channel = msgObject.channel;
+  channel.send(params.join(" "), {tts: true}).then( message => console.log("Sent tts message to channel " + channel.name)).catch(console.error);
+  cb(null);
 }
 
 const ttsModule = {

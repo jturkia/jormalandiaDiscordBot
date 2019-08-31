@@ -6,7 +6,7 @@ const client = new Discord.Client();
 const channelRetriever = require(__dirname + "/server/retrievers/channelRetriever.js")(client);
 const messageRetriever = require(__dirname + "/server/retrievers/messageRetriever.js")(client);
 
-const messageHandler = require(__dirname + "/server/handlers/messageHandler.js");
+const messageHandler = require(__dirname + "/server/handlers/messageHandler.js")(channelRetriever, messageRetriever);
 const presenceUpdateHandler = require(__dirname + "/server/handlers/presenceUpdateHandler.js");
 const voiceStatusHandler = require(__dirname + "/server/handlers/voiceStatusHandler.js");
 

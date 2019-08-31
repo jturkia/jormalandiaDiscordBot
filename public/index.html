@@ -3,8 +3,15 @@
   <head>
     <meta charset="utf-8">
     <title>JormaBot Admin Console</title>
+    <link rel="stylesheet" href="/css/style.min.css">
   </head>
   <body>
-    <h1>Hello World!</h1>
+    <div class="header">
+      <div class="header-item" onclick="loadPage('suggestion')"><span>Suggestions</span></div>
+      <div class="header-item" onclick="loadPage('interact')"><span>Interact</span></div>
+    </div>
+    <div id="main-content-div" class="main-content"></div>
+
+    <script src="js/common.js"></script>
   </body>
 </html>

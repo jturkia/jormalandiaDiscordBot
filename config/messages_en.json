@@ -1,0 +1,4 @@
+{
+  "init_message": "Have no fear, {name} is here!",
+  "shutdown_message": "{name} is going away :("
+}

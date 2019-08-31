@@ -1,0 +1,4 @@
+{
+  "init_message": "Ällös huoli, {name} on täällä!",
+  "shutdown_message": "{name} poistuu paikalta :("
+}

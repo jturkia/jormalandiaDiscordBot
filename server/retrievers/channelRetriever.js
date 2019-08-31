@@ -6,9 +6,11 @@ module.exports = (client) => {
     for(let i = 0; i < channels.length; i++){
       let channelName = channels[i].name;
       if(name.toLowerCase() === channelName.toLowerCase()){
+        console.log("Channel " + name + " found!");
         return channels[i];
       }
     }
+    console.log("Channel " + name + " was not found");
     return null;
   }
 

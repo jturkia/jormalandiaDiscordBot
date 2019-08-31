@@ -1,0 +1,21 @@
+{
+  "name": "discordjormabot",
+  "version": "1.0.0",
+  "description": "Bot application for Jormalandia discord server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jere Turkia",
+  "license": "ISC",
+  "dependencies": {
+    "bufferutil": "^4.0.1",
+    "discord.js": "^11.5.1",
+    "dotenv": "^8.1.0",
+    "erlpack": "github:hammerandchisel/erlpack",
+    "libsodium-wrappers": "^0.7.5",
+    "node-opus": "^0.3.2",
+    "request": "^2.88.0"
+  }
+}

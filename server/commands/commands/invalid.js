@@ -4,7 +4,7 @@ const usage = () => {
   return "!invalid";
 }
 
-const execute = (msgObject, params) => {
+const execute = (msgObject, params, cb) => {
   let txt = "Invalid command " + params[0] + "! Available commands: \n";
 
   let list = fs.readdirSync(__dirname + "/");
@@ -12,8 +12,7 @@ const execute = (msgObject, params) => {
     if(list[i].toLowerCase() === "invalid.js") continue;
     txt += "- " + require(__dirname + "/" + list[i]).usage() + "\n";
   }
-
-  return txt;
+  cb(txt);
 }
 
 const invalidModule = {

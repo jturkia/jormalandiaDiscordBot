@@ -2,9 +2,9 @@ const usage = () => {
   return "!echo <text>";
 }
 
-const execute = (msgObject, params) => {
+const execute = (msgObject, params, cb) => {
   let txt = params.join(" ");
-  return txt;
+  cb(txt);
 }
 
 const echoModule = {

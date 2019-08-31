@@ -14,7 +14,7 @@ const printMessageInfo = (msg) => {
   console.log("---Message stop---");
 }
 
-const getAndExecuteCommand = (msg) => {
+const getAndExecuteCommand = (msg, cb) => {
   let txt = msg.content;
   if(txt.length >= 2 && txt.charAt(0) === "!"){
     let splitted = txt.split(" ");
@@ -28,34 +28,35 @@ const getAndExecuteCommand = (msg) => {
       }
       if(commandList[cmd].execute && typeof commandList[cmd].execute === "function") {
         console.log("Command " + cmd + " found! Executing with params " + params)
-        return commandList[cmd].execute(msg, params);
+        commandList[cmd].execute(msg, params, cb);
       }
       else{
         console.log("Command " + cmd + " was found, but 'execute' was not found to be function for that command");
-        return commandList["invalid"].execute(msg, params);
+        commandList["invalid"].execute(msg, params, cb);
       }
     }
     else {
       console.log("Command " + cmd + " not found, executing invalid command")
       let params = [];
       params.push(cmd);
-      return commandList["invalid"].execute(msg, params);
+      commandList["invalid"].execute(msg, params, cb);
     }
   }
-  else return null;
+  else cb(null);
 }
 
 const handleMessage = (msg) => {
   printMessageInfo(msg);
-  let commandResult = getAndExecuteCommand(msg);
-  if(commandResult) {
-    if(typeof commandResult === "object"){
-      let msgOptions = {tts: false};
-      if(commandResult.tts) msgOptions.tts = commandResult.tts;
-      if(commandResult.responseText) msg.reply(commandResult.responseText, msgOptions);
+  getAndExecuteCommand(msg, (commandResult) => {
+    if(commandResult) {
+      if(typeof commandResult === "object"){
+        let msgOptions = {tts: false};
+        if(commandResult.tts) msgOptions.tts = commandResult.tts;
+        if(commandResult.responseText) msg.reply(commandResult.responseText, msgOptions);
+      }
+      else msg.reply(commandResult);
     }
-    else msg.reply(commandResult);
-  }
+  });
 }
 
 module.exports = {

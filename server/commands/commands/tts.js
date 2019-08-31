@@ -2,12 +2,12 @@ const usage = () => {
   return "!tts <text>";
 }
 
-const execute = (msgObject, params) => {
+const execute = (msgObject, params, cb) => {
   let result = {
     responseText: params.join(" "),
     tts: true
   };
-  return result;
+  cb(result);
 }
 
 const ttsModule = {

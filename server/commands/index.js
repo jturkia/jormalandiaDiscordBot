@@ -1,4 +1,4 @@
-module.exports = (channelRetriever, messageRetriever) => {
+module.exports = (client, channelRetriever, messageRetriever) => {
   const fs = require("fs");
 
   let commandList = {};
@@ -7,7 +7,7 @@ module.exports = (channelRetriever, messageRetriever) => {
   for(let i = 0; i < list.length ; i++){
     let name = list[i].replace(/.js/, "");
     let command = require(__dirname + "/commands/" + list[i]);
-    if(typeof command === "function") commandList[name] = require(__dirname + "/commands/" + list[i])(channelRetriever, messageRetriever);
+    if(typeof command === "function") commandList[name] = require(__dirname + "/commands/" + list[i])(client, channelRetriever, messageRetriever);
     else commandList[name] = require(__dirname + "/commands/" + list[i]);
   }
 

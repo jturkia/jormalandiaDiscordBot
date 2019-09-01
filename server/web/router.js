@@ -1,8 +1,9 @@
-const authenticator = require(__dirname + "/authenticator.js");
-const dataHandler = require(__dirname + "/dataHandler.js");
-const botInteractor = require(__dirname + "/botInteractor.js");
+module.exports = (client) => {
 
-module.exports = () => {
+  const authenticator = require(__dirname + "/authenticator.js");
+  const dataHandler = require(__dirname + "/dataHandler.js");
+  const botInteractor = require(__dirname + "/botInteractor.js")(client);
+
   const Express = require("express");
   const router = Express.Router();
 
@@ -13,7 +14,10 @@ module.exports = () => {
   router.post("/api/suggestion/update/:id", authenticator.authenticate, dataHandler.updateSuggestion);
   router.delete("/api/suggestion/:id", authenticator.authenticate, dataHandler.deleteSuggestion);
 
-  router.post("/api/bot/sendMessage", authenticator.authenticate, botInteractor.sendMessage);
+  router.post("/api/bot/message", authenticator.authenticate, botInteractor.sendMessage);
+  router.get("/api/bot/voices", authenticator.authenticate, botInteractor.getVoiceList);
+  router.get("/api/bot/play-voice/:filename", authenticator.authenticate, botInteractor.playVoice);
+  router.get("/api/bot/play-youtube/:link", authenticator.authenticate, botInteractor.playYoutubeLink);
 
   return router;
 }

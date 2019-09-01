@@ -1,5 +1,5 @@
-module.exports = (channelRetriever, messageRetriever) => {
-  const commandList = require(__dirname + "/../commands")(channelRetriever, messageRetriever);
+module.exports = (client, channelRetriever, messageRetriever) => {
+  const commandList = require(__dirname + "/../commands")(client, channelRetriever, messageRetriever);
 
   const printMessageInfo = (msg) => {
     console.log("---Message start---");
@@ -53,9 +53,9 @@ module.exports = (channelRetriever, messageRetriever) => {
         if(typeof commandResult === "object"){
           let msgOptions = {tts: false};
           if(commandResult.tts) msgOptions.tts = commandResult.tts;
-          if(commandResult.responseText) msg.reply(commandResult.responseText, msgOptions).then(sent => consosle.log("Sent reply to " + sent.author.username)).catch(console.error);
+          if(commandResult.responseText) msg.reply(commandResult.responseText, msgOptions).then(sent => console.log("Sent reply to " + sent.author.username)).catch(console.error);
         }
-        else msg.reply(commandResult).then(sent => consosle.log("Sent reply to " + sent.author.username)).catch(console.error);
+        else msg.reply(commandResult).then(sent => console.log("Sent reply to " + sent.author.username)).catch(console.error);
       }
     });
   }

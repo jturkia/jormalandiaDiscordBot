@@ -1,2 +1,8 @@
 .env
 node_modules
+
+server/web/certs/*.pem
+server/web/certs/passphrase.txt
+server/web/users/users.json
+
+server/commands/voice-clips

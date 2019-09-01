@@ -1,5 +1,6 @@
 const fs = require("fs");
 const ytdl = require("ytdl-core");
+const path = require("path");
 
 module.exports = (client, channelRetriever, messageRetriever) => {
 
@@ -24,7 +25,7 @@ module.exports = (client, channelRetriever, messageRetriever) => {
     else{
       // is file
       result.type = "file";
-      let filePath = __dirname + "/../voice-clips/" + param + ".mp3";
+      let filePath = path.join(__dirname, "..", "voice-clips", param + ".mp3");
       console.log("File path to play: " + filePath);
       if(fs.existsSync(filePath)){
         result.path = filePath;
@@ -55,17 +56,20 @@ module.exports = (client, channelRetriever, messageRetriever) => {
         voiceConnections[i].playStream(ytdl(clipType.path, { filter: "audioonly"}));
       }
       else if(clipType.type === "url"){
-        //voiceConnections[i].play(clipType.path);
+        voiceConnections[i].playArbitraryInput(clipType.path);
       }
       else if(clipType.type === "file"){
-        voiceConnections[i].playFile(clipType.path);
+        let dispatcher = voiceConnections[i].playFile(clipType.path);
+        dispatcher.on("start", () => console.log("Started"));
+        dispatcher.on("debug", info => console.log(info));
+        dispatcher.on("error", console.error);
+        dispatcher.on("end", () => console.log("Ended"));
       }
       else{
         voiceConnections[i].playArbitraryInput(params[0]);
       }
     }
-    if(clipType.type === "url") cb("No support yet for random urls");
-    else cb(null);
+    cb(null);
   }
 
   const playModule = {

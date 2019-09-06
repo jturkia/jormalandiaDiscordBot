@@ -101,7 +101,15 @@ module.exports = (client, channelRetriever) => {
       response.send("Channel not found or is not voice channel");
       return;
     }
-    channel.join().then(connection => console.log("Joined voice channel " + channelName)).catch(console.error);
+    channel.join().then(connection => {
+      console.log("Joined voice channel " + channelName)
+      response.status(200);
+      respones.send("Ok");
+    }).catch( err => {
+      response.status(500);
+      respones.send("Unexpected error joining");
+      console.error(err);
+    )};
   }
 
   const botInteractorModule = {

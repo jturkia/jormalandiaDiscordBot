@@ -15,7 +15,7 @@ const authenticate = (request, response, next) => {
     if(splitted.length != 2) deny(response);
     else if(splitted[0] !== "Basic") deny(response);
     else{
-      fs.readFile(__dirname + "/users/users.json", "utf-8", (err, data) => {
+      fs.readFile(__dirname + "/../users/users.json", "utf-8", (err, data) => {
         if(err) {
           console.log("ERROR reading users.json " + err);
           response.status(500);
@@ -36,13 +36,16 @@ const authenticate = (request, response, next) => {
             }
             if(!users[username]) deny(response);
             else{
-              let userPassword = users[username];
+              let userPassword = users[username].password;
               bcrypt.compare(password, userPassword, (err, res) => {
                 if(err){
                   console.log("Comparison failed?!?!?");
                   deny(response);
                 }
-                else if(res) next();
+                else if(res) {
+                  request.role = users[username].role;
+                  next();
+                }
                 else deny(response);
               });
             }

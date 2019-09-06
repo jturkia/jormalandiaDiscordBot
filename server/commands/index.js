@@ -10,6 +10,5 @@ module.exports = (client, channelRetriever, messageRetriever) => {
     if(typeof command === "function") commandList[name] = require(__dirname + "/commands/" + list[i])(client, channelRetriever, messageRetriever);
     else commandList[name] = require(__dirname + "/commands/" + list[i]);
   }
-
   return commandList;
 }

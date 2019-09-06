@@ -5,9 +5,9 @@ const bodyParser = require("body-parser");
 const Express = require("express");
 const helmet = require("helmet");
 
-module.exports = (client) => {
+module.exports = (client, channelRetriever) => {
 
-  const router = require(__dirname + "/router.js")(client);
+  const router = require(__dirname + "/router.js")(client, channelRetriever);
 
   const app = Express();
   app.use(bodyParser.json({ limit: '5mb', parameterLimit: 10000}));
@@ -23,8 +23,8 @@ module.exports = (client) => {
   Load certificates
   */
   const serverOpts = {
-    key: fs.readFileSync(__dirname + "/certs/key.pem"),
-    cert: fs.readFileSync(__dirname + "/certs/cert.pem"),
+    key: fs.readFileSync(__dirname + "/certs/key.key"),
+    cert: fs.readFileSync(__dirname + "/certs/cert.crt"),
     requestCert: false,
     rejectUnauthorized: false
   };

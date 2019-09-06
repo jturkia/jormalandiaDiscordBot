@@ -1,3 +1,6 @@
 {
-  "user": "$2a$10$wcB0.nVqliZre8oqLMvLIu5lXWUBnLVzeFdwxjunJX/2o67T0OEqm"
+  "user": {
+    "password": "$2a$10$wcB0.nVqliZre8oqLMvLIu5lXWUBnLVzeFdwxjunJX/2o67T0OEqm",
+    "role": "admin"
+  }
 }

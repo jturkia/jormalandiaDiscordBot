@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-const suggestionFolder = __dirname + "/../data/suggestions";
+const suggestionFolder = __dirname + "/../../data/suggestions";
 
 const getSuggestion = (request, response) => {
   let id = request.params.id;

@@ -35,4 +35,4 @@ process.on("SIGUSR1", exitHandler.bind("SIGUSR1"));
 process.on("SIGUSR2", exitHandler.bind("SIGUSR2"));
 process.on("uncaughtException", exitHandler.bind("uncaughtException"));
 
-require(__dirname + "/server/web")(client);
+require(__dirname + "/server/web")(client, channelRetriever);

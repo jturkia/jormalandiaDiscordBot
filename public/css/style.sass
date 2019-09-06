@@ -42,7 +42,7 @@ body
 .main-content
   padding: 12px
 
-#suggestion-content
+#suggestion-content, #interact-content
   ul
     li
       list-style: none
@@ -51,6 +51,15 @@ body
       box-shadow: 1px 1px 3px 1px #eee
       span
         margin-right: 24px
+      input[type=text]
+        margin-right: 12px
+      .tts-label
+        margin-left: 12px
+        margin-right: 4px
+
+.channel-label, .user-label
+  display: inline-block
+  width: 30%
 
 .voice-div
   padding-top: 25px

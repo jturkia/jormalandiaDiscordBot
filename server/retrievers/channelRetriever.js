@@ -24,9 +24,27 @@ module.exports = (client) => {
     return client.channels.get(id);
   }
 
+  const getDMChannel = (username, cb) => {
+    let users = client.users.array();
+    for(let i = 0; i < users.length; i++){
+      let name = users[i].username;
+      if(name === username){
+        users[i].createDM().then(dmChannel => {
+          cb(dmChannel)
+        }).catch(error => {
+          console.log(error);
+          cb(null);
+        });
+        return;
+      }
+    }
+    cb(null);
+  }
+
   const channelRetrieverModule = {
       getChannelByName: getChannelByName,
-      getChannelById: getChannelById
+      getChannelById: getChannelById,
+      getDMChannel: getDMChannel
   };
 
   return channelRetrieverModule;

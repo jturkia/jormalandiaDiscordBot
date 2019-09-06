@@ -4,6 +4,7 @@ module.exports = (client, channelRetriever, messageRetriever) => {
   const printMessageInfo = (msg) => {
     console.log("---Message start---");
     console.log("Author: " + msg.author.username);
+    console.log("Channel type: " + msg.channel.type);
     console.log("Channel: " + msg.channel.name);
     let mentionedUsers = msg.mentions.users.array();
     console.log("Mentions:");
@@ -46,9 +47,15 @@ module.exports = (client, channelRetriever, messageRetriever) => {
     else cb(null);
   }
 
+  const handleDM = (msg) => {
+    let channel = msg.channel;
+    channel.send("En tee vielä mitään järkevää täällä", {tts: true});
+  }
+
   const handleMessage = (msg) => {
     printMessageInfo(msg);
-    getAndExecuteCommand(msg, (commandResult) => {
+    if(msg.channel.type === "dm") handleDM(msg);
+    else getAndExecuteCommand(msg, (commandResult) => {
       if(commandResult) {
         if(typeof commandResult === "object"){
           let msgOptions = {tts: false};
